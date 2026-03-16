@@ -85,7 +85,11 @@ def rating_to_num(val):
 
 # ─── Sidebar Navigation ──────────────────────────────────────────────────────
 with st.sidebar:
-    st.image("https://www.jetaholding.com/wp-content/uploads/2024/11/jeta-holding-logo.svg", width=180)
+    st.markdown(
+        '<h2 style="color: #1F4E79; margin: 0;">JETA Africa</h2>'
+        '<p style="color: #666; font-size: 0.85rem; margin: 0;">Holding Group</p>',
+        unsafe_allow_html=True,
+    )
     st.markdown("---")
 
     menu = st.radio(
