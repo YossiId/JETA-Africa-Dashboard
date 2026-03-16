@@ -170,7 +170,7 @@ def show_leads_table(df, key_prefix=""):
     available_cols = [c for c in display_cols if c in filtered.columns]
     st.dataframe(
         filtered[available_cols],
-        use_container_width=True,
+        width="stretch",
         height=500,
         column_config={
             "Website": st.column_config.LinkColumn("Website"),
@@ -233,7 +233,7 @@ if menu == "Overview":
             )
             fig.update_traces(textposition="inside", textinfo="value+label")
             fig.update_layout(showlegend=False, height=350)
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig)
         else:
             st.info("Pharma data not loaded yet.")
 
@@ -250,7 +250,7 @@ if menu == "Overview":
             )
             fig.update_traces(textposition="inside", textinfo="value+label")
             fig.update_layout(showlegend=False, height=350)
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig)
         else:
             st.info("Fintech data will appear here once the Fintech agent runs.")
 
@@ -282,7 +282,7 @@ if menu == "Overview":
                 color_discrete_map={"Pharma Leads": "#1F4E79", "Fintech Leads": "#2E7D32"},
             )
             fig.update_layout(height=400)
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig)
 
 
 # ─── Pharma Page ──────────────────────────────────────────────────────────────
@@ -351,7 +351,7 @@ elif menu == "Pharma — Africa":
                     color_continuous_scale="Viridis",
                 )
                 fig.update_layout(height=400, showlegend=False)
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig)
 
             with col2:
                 # By strategic potential
@@ -363,7 +363,7 @@ elif menu == "Pharma — Africa":
                     color_discrete_map={"גבוה": "#2E7D32", "בינוני": "#FF9800", "נמוך": "#F44336"},
                 )
                 fig.update_layout(height=400)
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig)
 
             col3, col4 = st.columns(2)
 
@@ -377,7 +377,7 @@ elif menu == "Pharma — Africa":
                         color="Manufacturer Type",
                     )
                     fig.update_layout(height=400, showlegend=False)
-                    st.plotly_chart(fig, use_container_width=True)
+                    st.plotly_chart(fig)
 
             with col4:
                 # Confidence level
@@ -389,7 +389,7 @@ elif menu == "Pharma — Africa":
                     color_discrete_map={"גבוהה": "#2E7D32", "בינונית": "#FF9800", "נמוכה": "#F44336"},
                 )
                 fig.update_layout(height=400)
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig)
 
     else:
         st.warning("No pharma data found. Run the pharma agent first.")
@@ -430,7 +430,7 @@ elif menu == "Fintech — Africa":
                     color="count", color_continuous_scale="Viridis",
                 )
                 fig.update_layout(height=400, showlegend=False)
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig)
             with col2:
                 sp_counts = df["Strategic Potential"].value_counts().reset_index()
                 fig = px.pie(
@@ -440,7 +440,7 @@ elif menu == "Fintech — Africa":
                     color_discrete_map={"גבוה": "#2E7D32", "בינוני": "#FF9800", "נמוך": "#F44336"},
                 )
                 fig.update_layout(height=400)
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig)
     else:
         st.info(
             "Fintech data is not available yet.\n\n"
