@@ -68,14 +68,18 @@ DATA_DIR = Path(__file__).parent
 def load_pharma_data():
     path = DATA_DIR / "pharma_africa_leads.xlsx"
     if path.exists():
-        return pd.read_excel(path, sheet_name="All Companies")
+        df = pd.read_excel(path, sheet_name="All Companies")
+        df["Country"] = df["Country"].fillna("Unknown")
+        return df
     return pd.DataFrame()
 
 @st.cache_data
 def load_fintech_data():
     path = DATA_DIR / "fintech_africa_leads.xlsx"
     if path.exists():
-        return pd.read_excel(path, sheet_name="All Companies")
+        df = pd.read_excel(path, sheet_name="All Companies")
+        df["Country"] = df["Country"].fillna("Unknown")
+        return df
     return pd.DataFrame()
 
 
@@ -233,7 +237,7 @@ if menu == "Overview":
             )
             fig.update_traces(textposition="inside", textinfo="value+label")
             fig.update_layout(showlegend=False, height=350)
-            st.plotly_chart(fig)
+            st.plotly_chart(fig, width="stretch")
         else:
             st.info("Pharma data not loaded yet.")
 
@@ -250,7 +254,7 @@ if menu == "Overview":
             )
             fig.update_traces(textposition="inside", textinfo="value+label")
             fig.update_layout(showlegend=False, height=350)
-            st.plotly_chart(fig)
+            st.plotly_chart(fig, width="stretch")
         else:
             st.info("Fintech data will appear here once the Fintech agent runs.")
 
@@ -282,7 +286,7 @@ if menu == "Overview":
                 color_discrete_map={"Pharma Leads": "#1F4E79", "Fintech Leads": "#2E7D32"},
             )
             fig.update_layout(height=400)
-            st.plotly_chart(fig)
+            st.plotly_chart(fig, width="stretch")
 
 
 # ─── Pharma Page ──────────────────────────────────────────────────────────────
@@ -351,7 +355,7 @@ elif menu == "Pharma — Africa":
                     color_continuous_scale="Viridis",
                 )
                 fig.update_layout(height=400, showlegend=False)
-                st.plotly_chart(fig)
+                st.plotly_chart(fig, width="stretch")
 
             with col2:
                 # By strategic potential
@@ -363,7 +367,7 @@ elif menu == "Pharma — Africa":
                     color_discrete_map={"גבוה": "#2E7D32", "בינוני": "#FF9800", "נמוך": "#F44336"},
                 )
                 fig.update_layout(height=400)
-                st.plotly_chart(fig)
+                st.plotly_chart(fig, width="stretch")
 
             col3, col4 = st.columns(2)
 
@@ -377,7 +381,7 @@ elif menu == "Pharma — Africa":
                         color="Manufacturer Type",
                     )
                     fig.update_layout(height=400, showlegend=False)
-                    st.plotly_chart(fig)
+                    st.plotly_chart(fig, width="stretch")
 
             with col4:
                 # Confidence level
@@ -389,7 +393,7 @@ elif menu == "Pharma — Africa":
                     color_discrete_map={"גבוהה": "#2E7D32", "בינונית": "#FF9800", "נמוכה": "#F44336"},
                 )
                 fig.update_layout(height=400)
-                st.plotly_chart(fig)
+                st.plotly_chart(fig, width="stretch")
 
     else:
         st.warning("No pharma data found. Run the pharma agent first.")
@@ -430,7 +434,7 @@ elif menu == "Fintech — Africa":
                     color="count", color_continuous_scale="Viridis",
                 )
                 fig.update_layout(height=400, showlegend=False)
-                st.plotly_chart(fig)
+                st.plotly_chart(fig, width="stretch")
             with col2:
                 sp_counts = df["Strategic Potential"].value_counts().reset_index()
                 fig = px.pie(
@@ -440,7 +444,7 @@ elif menu == "Fintech — Africa":
                     color_discrete_map={"גבוה": "#2E7D32", "בינוני": "#FF9800", "נמוך": "#F44336"},
                 )
                 fig.update_layout(height=400)
-                st.plotly_chart(fig)
+                st.plotly_chart(fig, width="stretch")
     else:
         st.info(
             "Fintech data is not available yet.\n\n"
